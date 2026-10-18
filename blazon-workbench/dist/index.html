@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f5f3ed">
+  <meta name="description" content="Turn the language of heraldry into vector art. Write a blazon, validate its syntax, and download a composable SVG coat of arms.">
+  <title>Blazon — Words into arms</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="site-header wrap">
+    <a class="brand" href="./" aria-label="Blazon home"><svg width="29" height="34" viewBox="0 0 40 48" aria-hidden="true"><path d="M3 3H37V21Q37 36 20 45Q3 36 3 21Z" fill="#243d4c"/><path d="M5 7L34 37L38 26L16 3H5Z" fill="#e8bd64"/></svg><span>BLAZON<span class="brand-caption">A HERALDIC WORKBENCH</span></span></a>
+    <nav aria-label="Main navigation"><a href="#examples">Explore examples <span aria-hidden="true"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M4 12L12 4M4 4H12V12"/></svg></span></a><button class="text-button" id="reference-open">Language guide <span aria-hidden="true"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M4 12L12 4M4 4H12V12"/></svg></span></button><span class="version">v0.1</span></nav>
+  </header>
+  <main class="wrap">
+    <section class="intro">
+      <div><div class="eyebrow"><span class="small-line"></span> THE LANGUAGE BEHIND THE SHIELD</div><h1>Words into <em>arms.</em></h1><p>A little language. A centuries-old art.<br>Describe a coat of arms and watch it take shape.</p></div>
+      <div class="intro-aside"><svg class="asterisk" width="54" height="54" viewBox="0 0 54 54" aria-hidden="true"><g stroke="currentColor" stroke-width="2"><path d="M27 3V51M3 27H51M10 10L44 44M10 44L44 10"/></g><circle cx="27" cy="27" r="5" fill="currentColor"/></svg><p>Written in heraldry.<br>Rendered in SVG.<br><span>Made for experimenting.</span></p></div>
+    </section>
+    <section class="workbench" aria-label="Blazon editor and preview">
+      <div class="editor-column">
+        <div class="panel-top"><h2><span class="step-number">01</span> Write your blazon</h2><span class="live"><i></i> LIVE VALIDATION</span></div>
+        <div class="editor-body">
+          <div class="editor-toolbar"><label for="example-select">LOAD AN EXAMPLE</label><select id="example-select" aria-label="Load an example"></select></div>
+          <div class="code-editor"><div class="line-numbers" aria-hidden="true">1<br>2<br>3<br>4<br>5</div><label class="sr-only" for="blazon-input">Textual blazon</label><textarea id="blazon-input" spellcheck="false" autocomplete="off" autocapitalize="off" maxlength="8000">Azure, a bend Or.</textarea></div>
+          <div class="editor-meta"><span>ENGLISH BLAZON · <span id="character-count">17</span> CHARACTERS</span><span>⌘ / CTRL + ENTER</span></div>
+          <div class="editor-actions"><button class="button primary" id="render-button">Render arms <span aria-hidden="true">→</span></button><button class="button secondary" id="reset-button">Reset</button></div>
+          <div id="diagnostic" class="diagnostic valid" role="status" aria-live="polite"></div>
+          <div id="warning" class="warning" hidden></div>
+        </div>
+        <div class="inspector">
+          <div class="inspector-tabs" role="tablist" aria-label="Compiler details"><button role="tab" aria-selected="true" aria-controls="reading-panel" id="reading-tab" data-tab="reading">How it is read</button><button role="tab" aria-selected="false" aria-controls="ast-panel" id="ast-tab" data-tab="ast" tabindex="-1">Syntax tree</button><button role="tab" aria-selected="false" aria-controls="source-panel" id="source-tab" data-tab="source" tabindex="-1">SVG source</button></div>
+          <div id="reading-panel" class="inspector-panel" role="tabpanel" aria-labelledby="reading-tab"></div>
+          <pre id="ast-panel" class="inspector-panel source" role="tabpanel" aria-labelledby="ast-tab" hidden></pre>
+          <pre id="source-panel" class="inspector-panel source" role="tabpanel" aria-labelledby="source-tab" hidden></pre>
+        </div>
+      </div>
+      <div class="preview-column">
+        <div class="panel-top"><h2><span class="step-number">02</span> Your coat of arms</h2><span class="output-type">SVG · VECTOR OUTPUT</span></div>
+        <div class="preview-canvas" id="preview-canvas"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><div id="shield-preview"></div><div class="preview-caption"><span class="caption-line"></span><span id="preview-label">AZURE, A BEND OR.</span><span class="caption-line"></span></div><div class="preview-notice" id="preview-notice" hidden>Fix the blazon to see a new rendering.</div></div>
+        <div class="preview-controls"><div class="shape-control"><label for="shield-shape">SHIELD</label><select id="shield-shape"><option value="heater">Heater</option><option value="french">French</option><option value="round">Rounded</option></select></div><button class="icon-button" id="copy-link" title="Copy a link to this blazon" aria-label="Copy a link to this blazon"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M4 12L12 4M4 4H12V12"/></svg></button><button class="button primary download" id="download-button"><svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true"><path d="M10 2V12M6 8L10 12L14 8M3 13V17H17V13" fill="none" stroke="currentColor" stroke-width="1.5"/></svg> Download SVG</button></div>
+      </div>
+    </section>
+    <section class="examples-section" id="examples">
+      <div class="section-heading"><div><div class="eyebrow">A FEW PLACES TO BEGIN</div><h2>Old words, endless possibilities.</h2></div><a href="https://en.wikipedia.org/wiki/Blazon" target="_blank" rel="noreferrer">Examples from Wikipedia <span aria-hidden="true"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M4 12L12 4M4 4H12V12"/></svg></span></a></div>
+      <div class="example-grid" id="example-grid"></div>
+    </section>
+    <section class="language-note"><div class="note-number">Aa.</div><div><h2>A grammar, with room to grow.</h2><p>Blazon describes what belongs on a shield, while leaving the drawing to the artist. This workbench uses a small, explicit English grammar and reusable vector shapes. Complex historical arms may fall outside its vocabulary.</p></div><button class="text-button" id="reference-open-bottom">See what’s supported <span aria-hidden="true">→</span></button></section>
+    <footer><span>BLAZON <span class="footer-divider">/</span> A SMALL EXPERIMENT IN HERALDRY</span><span>Parsed locally. Drawn with building blocks.</span></footer>
+  </main>
+  <dialog id="reference-dialog" aria-labelledby="guide-title"><div class="dialog-header"><div><div class="eyebrow">LANGUAGE REFERENCE · v0.1</div><h2 id="guide-title">The anatomy of a blazon.</h2></div><button id="reference-close" class="icon-button" aria-label="Close language guide">×</button></div><div class="dialog-content">
+    <p class="guide-intro">Start with the field, then add charges and their tinctures. Punctuation and capitalization are flexible. Every word must be understood before a shield is rendered.</p>
+    <div class="grammar-example"><span>Azure</span>, a <span>bend</span> <span>Or</span>.<div><small>01 FIELD</small><small>02 CHARGE</small><small>03 TINCTURE</small></div></div>
+    <h3>Tinctures</h3><div id="tincture-guide" class="tincture-guide"></div>
+    <h3>Fields & divisions</h3><p>Solid tinctures; ermine and ermines; per pale, fess, bend, bend sinister, chevron, or saltire; quarterly with two tinctures. Patterns: barry, burely, paly, bendy, chequy, and lozengy. Use “of six” or “(6)” for pattern counts.</p><code>Per pale Argent and Azure, a fleur-de-lis counterchanged.</code>
+    <h3>Ordinaries & charges</h3><p id="charge-guide"></p><p>Counts from one to twelve. Several charges default to a balanced arrangement; “in fess”, “in pale”, “in bend”, “in chief”, “in base”, and “ill-ordered” change placement. Dexter is the viewer’s left.</p><code>Gules, on a bend Or between two mullets Argent, three crescents Sable.</code>
+    <h3>References & composition</h3><p>“Of the same”, “of the field”, and “of the first” (through tenth) refer to earlier tinctures. A final tincture may be shared: “Argent, two chevrons and a canton Gules”. “On” and “charged with” place a simple charge group on a single chief, canton, bend, fess, bar, or pale. “Between” adds a simple surrounding group.</p><p>Numbered quarterings use semicolons between groups. Each quarter contains another complete blazon:</p><code>Quarterly: 1st and 4th Azure, a fleur-de-lis Or; 2nd and 3rd Gules, a lion rampant Or.</code>
+    <h3>Drawing conventions</h3><p>Lions: rampant, passant, statant, contourné. Eagles: displayed. Trees: eradicated. Crosses: potent, pattée/patty, trefly. Chief, fess, bar, pale, and bend accept indented, wavy, or engrailed lines. Line treatments and animals are schematic; wavy and engrailed edges share a simplified contour. Armed, langued, beaked, membered, and crowned detail colours are supported on lions and eagles.</p>
+    <h3>Current boundaries</h3><p>This is a language subset, not a validator for all historical heraldry. Named arms, supporters, crests, mantling, arbitrary wing charges, semé, inescutcheons, and complex partition-specific placements are outside the grammar. Tincture-rule notices are advisory. SVGs use stylized shapes, not official emblazonments.</p>
+    <div class="fixture-summary" id="fixture-summary"></div><p class="source-credit">Example descriptions: <a href="https://en.wikipedia.org/wiki/Blazon" target="_blank" rel="noreferrer">Wikipedia, “Blazon”</a>. Tests include supported descriptions and explicit rejections of complex examples.</p>
+  </div></dialog>
+  <div id="toast" role="status" aria-live="polite" hidden></div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
